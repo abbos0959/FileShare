@@ -1,14 +1,15 @@
-const router=require("express").Router()
+const router = require("express").Router();
 
-const File=require("../models/fileModel")
+const File = require("../models/fileModel");
 
+router.get("/:uuid", async (req, res) => {
+   const file = await File.findOne({ uuid: req.params.uuid });
+   if (!file) {
+      return res.render("download", { error: "link muddati tugadi rais" });
+   }
 
+   const filePath = `${__dirname}/../${file.path}`;
+   res.download(filePath)
+});
 
-router.get("/:uuid", async(req,res)=>{
-const file=await File.findOne({uuid:req.params.uuid})
-if(!file){
-    return res.render("download",{error:"link muddati tugadi rais"})
-}
-})
-
-module.exports=router
+module.exports = router;

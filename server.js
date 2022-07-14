@@ -9,6 +9,7 @@ DB();
 
 
 app.use(express.static("public"))
+app.use(express.json())
 //template engine ejs
 
 app.set("views",path.join(__dirname,"/views"))
