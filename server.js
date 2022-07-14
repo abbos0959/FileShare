@@ -8,12 +8,14 @@ const DB = require("./connect/db");
 DB();
 
 
+app.use(express.static("public"))
 //template engine ejs
 
 app.set("views",path.join(__dirname,"/views"))
 app.set("view engine","ejs")
 app.use("/api/files", FileRouter);
 app.use("/files", ShowRouter);
+app.use("/files/download",require("./routers/download"))
 
 const PORT = process.env.PORT || 7000;
 
